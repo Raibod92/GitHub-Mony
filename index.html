@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Money · Raibod92</title>
+    <!-- GitHub favicon (official) -->
+    <link rel="icon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            background-color: #f6f8fa;
+            color: #24292f;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* GitHub header replica */
+        .gh-header {
+            background-color: #24292e;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+        }
+        .gh-header .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .gh-header .logo svg {
+            fill: #ffffff;
+            width: 32px;
+            height: 32px;
+        }
+        .gh-header .search {
+            background: #3a3f44;
+            border: 1px solid #57606a;
+            border-radius: 6px;
+            padding: 5px 12px;
+            color: #c9d1d9;
+            width: 260px;
+            font-size: 14px;
+            margin-left: auto;
+        }
+        .gh-header .nav-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .gh-header .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 400;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .gh-header .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* main container */
+        .main-content {
+            max-width: 960px;
+            margin: 24px auto;
+            padding: 0 16px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .repo-header {
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 24px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+        }
+        .repo-breadcrumb {
+            font-size: 20px;
+            color: #0969da;
+            margin-bottom: 16px;
+        }
+        .repo-breadcrumb span {
+            color: #57606a;
+        }
+        .balance-card {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .balance-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1f883d;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .balance-label {
+            font-size: 18px;
+            font-weight: 500;
+            color: #24292f;
+            margin-bottom: 4px;
+        }
+        .balance-usd {
+            font-size: 24px;
+            color: #57606a;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+        .project-badge {
+            background: #ddf4ff;
+            border: 1px solid #54aeff;
+            color: #0969da;
+            padding: 6px 12px;
+            border-radius: 2em;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        .qr-section {
+            margin-top: 24px;
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .qr-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #24292f;
+        }
+        .qr-code-container {
+            background: #ffffff;
+            padding: 12px;
+            border: 2px solid #d0d7de;
+            border-radius: 16px;
+            display: inline-block;
+        }
+        .qr-caption {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #57606a;
+            max-width: 280px;
+            text-align: center;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #24292f;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            margin-top: 16px;
+            user-select: none;
+        }
+        .back-button:hover {
+            background: #ebedf0;
+        }
+        .footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 12px;
+            color: #57606a;
+            border-top: 1px solid #d0d7de;
+            background: #ffffff;
+            margin-top: 32px;
+        }
+    </style>
+</head>
+<body>
+    <!-- GitHub-style header -->
+    <header class="gh-header">
+        <a href="#" class="logo" onclick="return false;">
+            <!-- GitHub Octocat SVG icon -->
+            <svg viewBox="0 0 16 16" width="32" height="32" aria-hidden="true">
+                <path fill="white" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87
+                2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+                0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12
+                0 0 .67-.21 2.2.82.64-.18 1.32-.27
+                2-.27.68 0 1.36.09 2 .27 1.53-1.04
+                2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                1.27.82 2.15 0 3.07-1.87 3.75-3.65
+                3.95.29.25.54.73.54 1.48 0 1.07-.01
+                1.93-.01 2.2 0 .21.15.46.55.38A8.013
+                8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span>GitHub</span>
+        </a>
+        <input class="search" type="text" placeholder="Search or jump to…" readonly>
+        <div class="nav-links">
+            <a href="#">Pull requests</a>
+            <a href="#">Issues</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Explore</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- Repository-like header -->
+        <div class="repo-header">
+            <div class="repo-breadcrumb">
+                <span style="font-weight:300;">Raibod92</span> / <strong>money</strong>
+                <span style="font-size:12px; margin-left:8px; background:#ddf4ff; color:#0969da; border-radius:2em; padding:0 8px;">Public</span>
+            </div>
+
+            <!-- Balance display -->
+            <div class="balance-card">
+                <div class="balance-label">💰 GitHub Mony Balance</div>
+                <div class="balance-amount">200 GitHub Mony</div>
+                <div class="balance-usd">= 100 Dollars (USD)</div>
+                <div style="margin-top: 12px;">
+                    <span class="project-badge">🚀 Project CODEORBIT</span>
+                </div>
+                <p style="font-size:14px; color:#57606a; margin-top:12px; max-width:400px; margin-left:auto; margin-right:auto;">
+                    This balance reflects earnings from the powerful <strong>CODEORBIT</strong> project, built and maintained by <strong>Raibod Vazifehshenas</strong>.
+                </p>
+            </div>
+        </div>
+
+        <!-- QR Code Payment Section -->
+        <div class="qr-section">
+            <h3>📱 Instant Payment Details</h3>
+            <div class="qr-code-container" id="qrcode"></div>
+            <p class="qr-caption">
+                <strong>Scan this QR code</strong> with your banking app or crypto wallet.<br>
+                The message will confirm the transfer of <strong>$100</strong> to <strong>Raibod Vazifehshenas</strong> for supporting <strong>CODEORBIT</strong>.
+            </p>
+            <p style="font-size:12px; color:#cf222e; margin-top:8px;">
+                🔒 Trusted & Secure — Verified by GitHub Money System
+            </p>
+        </div>
+
+        <!-- Back button to real GitHub -->
+        <div style="text-align: center;">
+            <button class="back-button" onclick="window.location.href='https://github.com';">
+                ← Back to GitHub.com
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © 2025 GitHub, Inc. — All rights reserved.
+        <br>Terms • Privacy • Security • Status • Docs
+        <br>Contact GitHub — Pricing — API — Training — Blog — About
+    </footer>
+
+    <!-- QR Code generation library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
+    </script>
+    <script>
+        // Generate QR code containing the payment message
+        const qrText = "[GitHub Money Transfer — Verified & Secured]\nPay $100 to Raibod Vazifehshenas for project CODEORBIT.\nAccount: Raibod92\nTransaction ID: GH-9283-RAIBOD-CODEORBIT\nSecure Verification Code: 4F7A-9B2C-1D6E\nReference: INV-2025-CODEORBIT-100USD\nTimestamp: 2026-06-01T09:41:23Z\nDigital Signature: SHA256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\nThis transfer is protected by GitHub Secure Payment Protocol.\nThank you for your support.";
+        new QRCode(document.getElementById("qrcode"), {
+            text: qrText,
+            width: 200,
+            height: 200,
+            colorDark: "#24292f",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+</html>
