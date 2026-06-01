@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Money · Raibod92</title>
-    <!-- GitHub favicon (official) -->
     <link rel="icon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
     <style>
         * {
@@ -20,8 +19,6 @@
             display: flex;
             flex-direction: column;
         }
-
-        /* GitHub header replica */
         .gh-header {
             background-color: #24292e;
             padding: 16px 32px;
@@ -71,8 +68,6 @@
         .gh-header .nav-links a:hover {
             opacity: 1;
         }
-
-        /* main container */
         .main-content {
             max-width: 960px;
             margin: 24px auto;
@@ -80,7 +75,6 @@
             flex: 1;
             width: 100%;
         }
-
         .repo-header {
             background: #ffffff;
             border: 1px solid #d0d7de;
@@ -163,7 +157,7 @@
             margin-top: 12px;
             font-size: 14px;
             color: #57606a;
-            max-width: 280px;
+            max-width: 400px;
             text-align: center;
         }
         .back-button {
@@ -198,10 +192,8 @@
     </style>
 </head>
 <body>
-    <!-- GitHub-style header -->
     <header class="gh-header">
         <a href="#" class="logo" onclick="return false;">
-            <!-- GitHub Octocat SVG icon -->
             <svg viewBox="0 0 16 16" width="32" height="32" aria-hidden="true">
                 <path fill="white" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
                 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
@@ -228,14 +220,11 @@
     </header>
 
     <div class="main-content">
-        <!-- Repository-like header -->
         <div class="repo-header">
             <div class="repo-breadcrumb">
                 <span style="font-weight:300;">Raibod92</span> / <strong>money</strong>
                 <span style="font-size:12px; margin-left:8px; background:#ddf4ff; color:#0969da; border-radius:2em; padding:0 8px;">Public</span>
             </div>
-
-            <!-- Balance display -->
             <div class="balance-card">
                 <div class="balance-label">💰 GitHub Mony Balance</div>
                 <div class="balance-amount">200 GitHub Mony</div>
@@ -249,7 +238,6 @@
             </div>
         </div>
 
-        <!-- QR Code Payment Section -->
         <div class="qr-section">
             <h3>📱 Instant Payment Details</h3>
             <div class="qr-code-container" id="qrcode"></div>
@@ -262,7 +250,6 @@
             </p>
         </div>
 
-        <!-- Back button to real GitHub -->
         <div style="text-align: center;">
             <button class="back-button" onclick="window.location.href='https://github.com';">
                 ← Back to GitHub.com
@@ -276,20 +263,20 @@
         <br>Contact GitHub — Pricing — API — Training — Blog — About
     </footer>
 
-    <!-- QR Code generation library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
-    </script>
     <script>
-        // Generate QR code containing the payment message
-        const qrText = "Pay $100 to Raibod Vazifehshenas\nProject: CODEORBIT\nAccount: Raibod92\nRef: GH-9283-CODEORBIT";
-        new QRCode(document.getElementById("qrcode"), {
-            text: qrText,
-            width: 200,
-            height: 200,
-            colorDark: "#24292f",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
+        const fullText = "[GitHub Money Transfer — Verified & Secured]\nPlease pay $100 to Raibod Vazifehshenas for project CODEORBIT.\nAccount: Raibod92\nTransaction ID: GH-9283-RAIBOD-CODEORBIT\nSecure Verification Code: 4F7A-9B2C-1D6E\nReference: INV-2025-CODEORBIT-100USD\nTimestamp: 2026-06-01T09:41:23Z\nDigital Signature: SHA256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\nThis transfer is protected by GitHub Secure Payment Protocol.\nThank you for your support.";
+
+        const encoded = encodeURIComponent(fullText);
+        const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encoded}&bgcolor=ffffff&color=24292f`;
+
+        const img = document.createElement('img');
+        img.src = qrURL;
+        img.width = 200;
+        img.height = 200;
+        img.alt = 'Payment QR Code';
+        img.style.borderRadius = '8px';
+
+        document.getElementById('qrcode').appendChild(img);
     </script>
 </body>
 </html>
